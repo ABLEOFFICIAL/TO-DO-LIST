@@ -41,9 +41,12 @@ function checked(e){
     e.preventDefault();
 
     var markItem = document.getElementsByClassName('list')
+     var afterClick = document.getElementsByClassName('list').classList.add('::after');
+
 
     if(e.target.className === 'list'){
-        document.getElementsByClassName('list').classList.add('with-after');
+        console.log('hello');
+        afterClick.style.display = 'block';
     }
 }
 
