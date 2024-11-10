@@ -41,6 +41,7 @@ function checked(e){
     e.preventDefault();
 
     var markItem = document.getElementsByClassName('list')
+    
      var afterClick = document.getElementsByClassName('list').classList.add('::after');
 
 
