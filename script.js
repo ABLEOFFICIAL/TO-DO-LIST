@@ -6,7 +6,7 @@ var ul = document.getElementById('listitems');
 
 // event listeners
 add.addEventListener('click', addList);
-ul.addEventListener('click', checked);
+ul.addEventListener('click', removeItem);
 
 function addList(e){
     e.preventDefault();
@@ -25,29 +25,37 @@ function addList(e){
         setTimeout(() => {warning.style.display = 'none'}, 3000);
     }else{
         var list = document.createElement('li');
-        list.className = 'list';
+        list.innerHTML = input.value;
+        ul.appendChild(list);
+        // list.className = 'list';
 
-        list.appendChild(toDoList);
+        // list.appendChild(toDoList);
         delbtn.appendChild(del);
         list.appendChild(delbtn);
-        ul.appendChild(list);
-
     }
     input.value = '';
+    saveData();
 
 }
 
-function checked(e){
+function removeItem(e) {
     e.preventDefault();
 
-    var markItem = document.getElementsByClassName('list')
-    
-     var afterClick = document.getElementsByClassName('list').classList.add('::after');
-
-
-    if(e.target.className === 'list'){
-        console.log('hello');
-        afterClick.style.display = 'block';
+    if (e.target.classList.contains('delbtn')){
+        ul.removeChild(e.target.parentElement);
+        saveData();
+    }else if(e.target.tagName === 'LI'){
+        e.target.classList.toggle('list');
+        saveData();
     }
 }
+
+function saveData(){
+    localStorage.setItem('data', listitems.textcontent);
+}
+
+function showtask(){
+    listitems.textcontent = localStorage.getItem('data');
+}
+showtask();
 
